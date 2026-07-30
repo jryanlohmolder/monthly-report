@@ -1,0 +1,4 @@
+.env
+dates.yaml
+__pycache__/
+*.pyc
