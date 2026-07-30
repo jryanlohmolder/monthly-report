@@ -1,0 +1,36 @@
+name: Monthly Report
+
+on:
+  schedule:
+    - cron: '0 4 * * 6'  # Midnight ET Saturday (4:00 AM UTC)
+  workflow_dispatch:       # Allows manual trigger from GitHub UI
+
+jobs:
+  run-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Write dates file
+        run: echo "${{ secrets.DATES_YAML }}" > dates.yaml
+
+      - name: Run report generator
+        env:
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          APP_PASSWORD: ${{ secrets.APP_PASSWORD }}
+          TO_ADDRESS: ${{ secrets.TO_ADDRESS }}
+          TASK_LIST_ID: ${{ secrets.TASK_LIST_ID }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+        run: python report_generator.py
