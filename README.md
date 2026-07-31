@@ -1,6 +1,6 @@
 # monthly-report
 
-A Python script that runs automatically every first Saturday of the month via GitHub Actions. It emails an HTML report of upcoming birthdays and anniversaries within a 30-day window, renders a calendar view, and creates corresponding tasks in Google Tasks.
+A Python script that runs automatically every first Saturday of the month via GitHub Actions. It emails an HTML report of upcoming birthdays and anniversaries within a 40-day window, renders a calendar view, and creates corresponding tasks in Google Tasks 7 days prior to the event.
 
 ---
 
