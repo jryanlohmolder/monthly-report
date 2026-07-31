@@ -1,4 +1,4 @@
 .env
 dates.yaml
 __pycache__/
-*.pyc
+*.pycget_token.py
